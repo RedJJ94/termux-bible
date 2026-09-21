@@ -1,0 +1,14 @@
+---
+title: The Termux Bible
+author:
+  - Termux Bible Project
+date: 2026
+lang: en
+description: >-
+  A comprehensive, practical, and research-driven reference for using Termux and
+  Android as a command-line environment.
+toc-title: Contents
+identifier:
+  text: urn:uuid:00000000-0000-0000-0000-000000000000
+  scheme: URN
+...
