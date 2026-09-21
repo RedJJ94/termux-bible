@@ -16,15 +16,15 @@ The project is developed in phases according to the roadmap and architecture in
 ## Current Status
 
 - Phase 1 — Foundation and Repository Setup: **complete**.
-- Phase 2 — Termux Foundations: **complete** (research, chapters, and audit done).
-- Phase 3 — Shell Command Bible: **research in progress**.
+- Phase 2 — Termux Foundations: **complete** (research, chapters, audit, and verification done).
+- Phase 3 — Shell Command Bible: **complete** (research, audit, chapters, content audit, verification, and EPUB build done).
 - Phases 4–13: not started.
 
 | Phase | Topic | Status |
 |-------|-------|--------|
 | 1 | Foundation and Repository Setup | complete |
 | 2 | Termux Foundations | complete, audited |
-| 3 | Shell Command Bible | research in progress |
+| 3 | Shell Command Bible | complete, audited |
 | 4 | Android and ADB | not started |
 | 5 | Shizuku and rish | not started |
 | 6 | Porter | not started |
@@ -36,7 +36,20 @@ The project is developed in phases according to the roadmap and architecture in
 | 12 | Command Encyclopedia and Quick Reference | not started |
 | 13 | Final Verification and Publication | not started |
 
-The project already builds successfully as an EPUB with `./build.sh`.
+Phase 3 added the **Shell Command Bible** in `02-shell/`: a ten-chapter command
+reference written for a fresh native Termux install. It opens with an
+introduction covering command provenance (which tool provides each command in a
+fresh install) and what needs `pkg install`, then covers filesystem and
+navigation, viewing and editing files, text processing and searching, processes
+and job control, permissions and ownership, archives and compression,
+networking, system information and utilities, and pipes, redirection, and shell
+built-ins. The chapters are based on the audited research in
+`research/commands/00-shell-command-bible-research.md`, distinguish command
+availability in a fresh Termux install from what requires package installation,
+and mark version- or device-dependent behavior rather than asserting it as
+universal.
+
+The project currently builds successfully as an EPUB with `./build.sh`.
 
 ## Repository Structure
 
@@ -54,18 +67,22 @@ and so on) and in `appendices/`. Research notes live under `research/`, organize
 by subject (currently `research/termux/` for Phase 2 and `research/commands/` for
 Phase 3).
 
-`00-foundations/` and `01-termux/` contain the completed Phase 2 chapters. The
-remaining sections currently contain only their introduction stubs and are filled
-in by later phases.
+`00-foundations/` and `01-termux/` contain the completed Phase 2 chapters;
+`02-shell/` contains the completed Phase 3 Shell Command Bible. The remaining
+sections currently contain only their introduction stubs and are filled in by
+later phases.
 
 ## Editing Workflow
 
 Substantial technical documentation follows this workflow:
 
-Research → Audit → Draft → Content Audit → Verify → Correct
+Research → Audit → Draft → Content Audit → Verify → Build
 
-Detailed behavior for each stage — including source priority, verification rules,
-and the requirement that corrections be independently verified — is defined in
+The research notes are audited before drafting, then the draft itself is audited
+for content, the resulting documentation is verified against the research and a
+target environment, and the EPUB build is run as a verification step. Detailed
+behavior for each stage — including source priority, verification rules, and
+the requirement that corrections be independently verified — is defined in
 `AGENTS.md`. Information that cannot be verified is marked as needing research
 rather than invented.
 
