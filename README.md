@@ -1,47 +1,82 @@
 # Termux Bible
 
 The Termux Bible is a comprehensive, practical, research-driven reference for using
-Termux and Android as a powerful command-line environment. It is written as
-Markdown and compiled to an EPUB with Pandoc.
+Termux and Android as a powerful command-line environment. It covers beginning to
+advanced topics: Termux fundamentals, the shell command set, Android and ADB
+workflows, privileged-access systems (Shizuku, rish, Porter), development tools,
+scripting and automation, document/media/data workflows, troubleshooting, and
+security.
 
-This repository is currently in Phase 1 (foundation and repository setup): the
-planning documents, publishing toolchain, and directory scaffold are in place.
-Substantive documentation content is added in later phases.
+Markdown is the canonical documentation source. The content is compiled to an EPUB
+with Pandoc via `build.sh`.
 
-## Project Goals
+The project is developed in phases according to the roadmap and architecture in
+`PLAN.md`. The permanent operating and research rules are defined in `AGENTS.md`.
 
-The project aims to:
+## Current Status
 
-- explain Termux from beginner to advanced levels;
-- document important shell commands and a broad command encyclopedia;
-- explain Android command-line workflows, ADB, and Android debugging;
-- document Shizuku, rish, and Porter as distinct privileged-access systems;
-- cover development tools, Git and GitHub, scripting, and automation;
-- cover documents, media, and data workflows;
-- provide troubleshooting, security guidance, quick-reference material, and
-  practical examples;
-- remain maintainable as Termux and Android evolve.
+- Phase 1 — Foundation and Repository Setup: **complete**.
+- Phase 2 — Termux Foundations: **complete** (research, chapters, and audit done).
+- Phase 3 — Shell Command Bible: **research in progress**.
+- Phases 4–13: not started.
 
-The operating and research rules for the project are defined in `AGENTS.md`.
-The project roadmap and architecture are defined in `PLAN.md`.
+| Phase | Topic | Status |
+|-------|-------|--------|
+| 1 | Foundation and Repository Setup | complete |
+| 2 | Termux Foundations | complete, audited |
+| 3 | Shell Command Bible | research in progress |
+| 4 | Android and ADB | not started |
+| 5 | Shizuku and rish | not started |
+| 6 | Porter | not started |
+| 7 | Power Tools | not started |
+| 8 | Documents, Media, and Data | not started |
+| 9 | Advanced Termux | not started |
+| 10 | Scripting and Automation | not started |
+| 11 | Troubleshooting and Security | not started |
+| 12 | Command Encyclopedia and Quick Reference | not started |
+| 13 | Final Verification and Publication | not started |
+
+The project already builds successfully as an EPUB with `./build.sh`.
 
 ## Repository Structure
 
-- `AGENTS.md` — permanent operating rules for the project.
+- `AGENTS.md` — permanent operating and research rules.
 - `PLAN.md` — project roadmap, architecture, phases, and planned contents.
-- `README.md` — this file.
 - `metadata.yaml`, `epub-style.css`, `build.sh` — EPUB publishing toolchain.
-- `00-foundations/` through `16-quick-reference/` — numbered documentation sections.
+- `00-foundations/` through `16-quick-reference/` — the numbered Bible sections.
+  These directories (plus `appendices/`) are the EPUB content.
 - `appendices/` — supporting reference material (glossary, indexes, and similar).
-- `research/` — research notes; supporting material that is not publication-ready
-  documentation and is excluded from the EPUB.
+- `research/` — research notes supporting the Bible. This is working material, not
+  publication-ready documentation, and is excluded from the EPUB.
 
-## How to Read It
+Bible chapters live in the numbered directories (`00-foundations/`, `01-termux/`,
+and so on) and in `appendices/`. Research notes live under `research/`, organized
+by subject (currently `research/termux/` for Phase 2 and `research/commands/` for
+Phase 3).
 
-Each numbered directory (`00-foundations/`, `01-termux/`, and so on) will contain
-the documentation for one section of the Bible. The sections are read in numeric
-order. `appendices/` is read last. Detailed reference material (command entries,
-troubleshooting, security) is cross-linked from the sections that depend on it.
+`00-foundations/` and `01-termux/` contain the completed Phase 2 chapters. The
+remaining sections currently contain only their introduction stubs and are filled
+in by later phases.
+
+## Editing Workflow
+
+Substantial technical documentation follows this workflow:
+
+Research → Audit → Draft → Content Audit → Verify → Correct
+
+Detailed behavior for each stage — including source priority, verification rules,
+and the requirement that corrections be independently verified — is defined in
+`AGENTS.md`. Information that cannot be verified is marked as needing research
+rather than invented.
+
+## Native Termux vs. proot
+
+The Bible documents several distinct execution environments and does not assume a
+command behaves identically across them. In particular, native Termux (the
+environment under `$PREFIX`, normally `/data/data/com.termux/files/usr`) differs
+from a Linux distribution running inside proot/proot-distro: package names, paths,
+`PATH`, and even which tool provides a given command can differ. Individual
+chapters state which environment they describe.
 
 ## How to Build the EPUB
 
@@ -71,13 +106,8 @@ An optional output path may be given:
 ## How to Contribute
 
 Follow the rules in `AGENTS.md`. Substantive technical claims must be researched,
-verified, and audited before they are added to the documentation. Information that
-cannot be verified is marked as needing research instead of being invented.
-
-## Project Status
-
-- Phase 1 — Foundation and Repository Setup: complete.
-- Phase 2 — Termux Foundations: not started.
+verified, and audited before they are added to the documentation, and they must be
+reproducible for a stated environment.
 
 ## Important References
 
