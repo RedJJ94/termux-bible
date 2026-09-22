@@ -18,14 +18,15 @@ The project is developed in phases according to the roadmap and architecture in
 - Phase 1 — Foundation and Repository Setup: **complete**.
 - Phase 2 — Termux Foundations: **complete** (research, chapters, audit, and verification done).
 - Phase 3 — Shell Command Bible: **complete** (research, audit, chapters, content audit, verification, and EPUB build done).
-- Phases 4–13: not started.
+- Phase 4 — Android and ADB: **complete** (research, audit, chapters, and EPUB build done).
+- Phases 5–13: not started.
 
 | Phase | Topic | Status |
 |-------|-------|--------|
 | 1 | Foundation and Repository Setup | complete |
 | 2 | Termux Foundations | complete, audited |
 | 3 | Shell Command Bible | complete, audited |
-| 4 | Android and ADB | not started |
+| 4 | Android and ADB | complete, audited |
 | 5 | Shizuku and rish | not started |
 | 6 | Porter | not started |
 | 7 | Power Tools | not started |
@@ -49,6 +50,25 @@ availability in a fresh Termux install from what requires package installation,
 and mark version- or device-dependent behavior rather than asserting it as
 universal.
 
+Phase 4 added the **Android and ADB** documentation in `03-android/` and
+`04-adb/`: the device-side Android command ecosystem and the ADB (Android
+Debug Bridge) channel that drives it from a computer. The `03-android/`
+chapters cover the Android shell (`/system/bin/sh`, mksh, and the
+toolbox/toybox tool set), Android properties (`getprop`/`setprop`), Android
+package management (`pm`, `cmd package`, `adb install` — versus Termux's
+`pkg`/`apt` and a proot distribution's package manager), the `cmd` dispatcher,
+the `am` activity manager, `settings` and `input`, `logcat`, `dumpsys`, and
+`screencap`/`screenrecord`. The `04-adb/` chapters cover ADB's
+client/server/`adbd` architecture and installation (including `android-tools`
+in Termux), USB and wireless debugging, `adb shell`, file transfer (`adb
+push`/`pull`), and end-to-end capture workflows. The chapters are based on the
+audited research in `research/android/00-android-shell-research.md`,
+`research/adb/00-adb-research.md`, and
+`research/adb/01-android-command-ecosystem-research.md`, keep native Termux,
+the Android shell, ADB shell, and proot distributions distinct, and mark
+version- or device-dependent behavior (`[version-sensitive]`, `[DEVICE]`)
+rather than asserting it as universal.
+
 The project currently builds successfully as an EPUB with `./build.sh`.
 
 ## Repository Structure
@@ -64,13 +84,14 @@ The project currently builds successfully as an EPUB with `./build.sh`.
 
 Bible chapters live in the numbered directories (`00-foundations/`, `01-termux/`,
 and so on) and in `appendices/`. Research notes live under `research/`, organized
-by subject (currently `research/termux/` for Phase 2 and `research/commands/` for
-Phase 3).
+by subject (currently `research/termux/` for Phase 2, `research/commands/` for
+Phase 3, and `research/android/` and `research/adb/` for Phase 4).
 
 `00-foundations/` and `01-termux/` contain the completed Phase 2 chapters;
-`02-shell/` contains the completed Phase 3 Shell Command Bible. The remaining
-sections currently contain only their introduction stubs and are filled in by
-later phases.
+`02-shell/` contains the completed Phase 3 Shell Command Bible; `03-android/`
+and `04-adb/` contain the completed Phase 4 Android and ADB chapters. The
+remaining sections currently contain only their introduction stubs and are
+filled in by later phases.
 
 ## Editing Workflow
 
