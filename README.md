@@ -19,7 +19,8 @@ The project is developed in phases according to the roadmap and architecture in
 - Phase 2 — Termux Foundations: **complete** (research, chapters, audit, and verification done).
 - Phase 3 — Shell Command Bible: **complete** (research, audit, chapters, content audit, verification, and EPUB build done).
 - Phase 4 — Android and ADB: **complete** (research, audit, chapters, and EPUB build done).
-- Phases 5–13: not started.
+- Phase 5 — Shizuku and rish: **complete** (research, audit, chapters, content audit, final verification, and EPUB build done).
+- Phases 6–13: planned in `PLAN.md`, not yet started.
 
 | Phase | Topic | Status |
 |-------|-------|--------|
@@ -27,7 +28,7 @@ The project is developed in phases according to the roadmap and architecture in
 | 2 | Termux Foundations | complete, audited |
 | 3 | Shell Command Bible | complete, audited |
 | 4 | Android and ADB | complete, audited |
-| 5 | Shizuku and rish | not started |
+| 5 | Shizuku and rish | complete, audited |
 | 6 | Porter | not started |
 | 7 | Power Tools | not started |
 | 8 | Documents, Media, and Data | not started |
@@ -69,6 +70,28 @@ the Android shell, ADB shell, and proot distributions distinct, and mark
 version- or device-dependent behavior (`[version-sensitive]`, `[DEVICE]`)
 rather than asserting it as universal.
 
+Phase 5 added the **Shizuku and rish** documentation in `05-shizuku/` and
+`06-rish/`: the privileged-access layer that lets normal Android apps call
+system APIs with ADB/root privileges, and the shell client (`rish`) that reaches
+it from a terminal app. The `05-shizuku/` chapters cover Shizuku fundamentals
+and architecture (manager app, `shizuku_server`, binder delivery), installation
+and activation/startup (root, wireless debugging, ADB), permissions and the
+server's identity (`API_V23`, uid 2000 vs root), command-line/Termux usage, and
+limitations and troubleshooting. The `06-rish/` chapters cover rish architecture
+and setup (the `rish` + `rish_shizuku.dex` export flow), command-line
+execution and environment handling (`RISH_PRESERVE_ENV`), and the relationship
+between rish and its Shizuku/Sui backends. The chapters track version-sensitive
+startup behavior — including the transition from the older `start.sh` flow to
+the native `libshizuku.so` starter in Shizuku v13.6.0 — and Android 14+
+writable-Dex considerations, and they keep rish's relationship to Porter
+strictly out of scope: Porter compatibility is deferred to Phase 6 and is not
+claimed here. The chapters are based on the audited research in
+`research/shizuku/00-shizuku-research.md` and
+`research/rish/00-rish-research.md`, keep Shizuku, rish, Sui, ADB, root, and
+Termux distinct, and mark version- or device-dependent behavior
+(`[version-sensitive]`, `[DEVICE]`, `[OEM]`) rather than asserting it as
+universal.
+
 The project currently builds successfully as an EPUB with `./build.sh`.
 
 ## Repository Structure
@@ -85,11 +108,14 @@ The project currently builds successfully as an EPUB with `./build.sh`.
 Bible chapters live in the numbered directories (`00-foundations/`, `01-termux/`,
 and so on) and in `appendices/`. Research notes live under `research/`, organized
 by subject (currently `research/termux/` for Phase 2, `research/commands/` for
-Phase 3, and `research/android/` and `research/adb/` for Phase 4).
+Phase 3, `research/android/` and `research/adb/` for Phase 4, and
+`research/shizuku/` and `research/rish/` for Phase 5).
 
 `00-foundations/` and `01-termux/` contain the completed Phase 2 chapters;
 `02-shell/` contains the completed Phase 3 Shell Command Bible; `03-android/`
-and `04-adb/` contain the completed Phase 4 Android and ADB chapters. The
+and `04-adb/` contain the completed Phase 4 Android and ADB chapters;
+`05-shizuku/` and `06-rish/` contain the completed Phase 5 Shizuku and rish
+chapters. The
 remaining sections currently contain only their introduction stubs and are
 filled in by later phases.
 
@@ -97,11 +123,14 @@ filled in by later phases.
 
 Substantial technical documentation follows this workflow:
 
-Research → Audit → Draft → Content Audit → Verify → Build
+Research → Research Audit → Draft → Content Audit → Final Verification → Phase
+commit containing research + chapters → README update → separate README commit
 
 The research notes are audited before drafting, then the draft itself is audited
 for content, the resulting documentation is verified against the research and a
-target environment, and the EPUB build is run as a verification step. Detailed
+target environment in a final verification pass, and the EPUB build is run as a
+verification step. Each phase is committed together with its research and
+chapters, and the README status update is then committed separately. Detailed
 behavior for each stage — including source priority, verification rules, and
 the requirement that corrections be independently verified — is defined in
 `AGENTS.md`. Information that cannot be verified is marked as needing research
