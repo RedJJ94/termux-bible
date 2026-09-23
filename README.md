@@ -20,7 +20,8 @@ The project is developed in phases according to the roadmap and architecture in
 - Phase 3 — Shell Command Bible: **complete** (research, audit, chapters, content audit, verification, and EPUB build done).
 - Phase 4 — Android and ADB: **complete** (research, audit, chapters, and EPUB build done).
 - Phase 5 — Shizuku and rish: **complete** (research, audit, chapters, content audit, final verification, and EPUB build done).
-- Phases 6–13: planned in `PLAN.md`, not yet started.
+- Phase 6 — Porter: **complete** (research, audit, chapters, content audit, final verification, and EPUB build done).
+- Phases 7–13: planned in `PLAN.md`, not yet started.
 
 | Phase | Topic | Status |
 |-------|-------|--------|
@@ -29,7 +30,7 @@ The project is developed in phases according to the roadmap and architecture in
 | 3 | Shell Command Bible | complete, audited |
 | 4 | Android and ADB | complete, audited |
 | 5 | Shizuku and rish | complete, audited |
-| 6 | Porter | not started |
+| 6 | Porter | complete, audited |
 | 7 | Power Tools | not started |
 | 8 | Documents, Media, and Data | not started |
 | 9 | Advanced Termux | not started |
@@ -92,6 +93,36 @@ Termux distinct, and mark version- or device-dependent behavior
 (`[version-sensitive]`, `[DEVICE]`, `[OEM]`) rather than asserting it as
 universal.
 
+Phase 6 added the **Porter** documentation in `07-porter/`: the privileged-access
+daemon that is an independent continuation of Shizuku and gives Android apps and
+the command line the ADB `shell` identity or root. The chapters cover Porter's
+architecture and its two Binder interfaces — the Porter wire
+(`eu.darken.porter.server.IPorterService`, with the `transactRemote`, porsh, and
+app transaction codes) and the legacy Shizuku wire (`IShizukuService`) over one
+shared core — installation and the Android 7.0+ requirement, the three startup
+methods (wireless debugging, a computer, root) and the start-on-boot mode, and
+the identity model: the server runs as uid 2000 (`shell`) when started with
+debugging access, or uid 0 (root) when started as root. Permissions and security
+are covered for the approval/confirmation flow (Deny / Allow all the time,
+deny-permanently, one-time grants, and the "Allow app access" pause switch) and
+for what each identity can and cannot do. porsh, Porter's own shell client, is
+documented for command-line use from Termux: the `porsh` + `porsh.dex` export
+flow, app-private placement on Android 14+, and
+`PORSH_PRESERVE_ENV`/`RISH_PRESERVE_ENV` environment filtering. The chapters
+distinguish porsh from rish, explain that the stock rish client is **not** a
+Porter client (its loader needs `moe.shizuku.manager.shell.Shell`, which
+Porter's manager APK does not ship, so it fails with `ClassNotFoundException`),
+and cover the optional Porter Compatibility companion that lets Shizuku-only
+apps reach Porter. Developer integration via the `porter-api` SDK (availability
+and connection StateFlows, permissions, `wrap`, user services) and the
+limitations and troubleshooting of the project are also documented. The
+chapters are based on the audited research in
+`research/porter/00-porter-research.md`, with the Phase 6 rish/Porter
+cross-reference in `research/rish/00-rish-research.md`; they keep Porter,
+Shizuku, Sui, rish, porsh, ADB, and root distinct, and mark version-, device-,
+or OEM-dependent behavior (`[version-sensitive]`, `[DEVICE]`, `[OEM]`) rather
+than asserting it as universal.
+
 The project currently builds successfully as an EPUB with `./build.sh`.
 
 ## Repository Structure
@@ -108,14 +139,16 @@ The project currently builds successfully as an EPUB with `./build.sh`.
 Bible chapters live in the numbered directories (`00-foundations/`, `01-termux/`,
 and so on) and in `appendices/`. Research notes live under `research/`, organized
 by subject (currently `research/termux/` for Phase 2, `research/commands/` for
-Phase 3, `research/android/` and `research/adb/` for Phase 4, and
-`research/shizuku/` and `research/rish/` for Phase 5).
+Phase 3, `research/android/` and `research/adb/` for Phase 4,
+`research/shizuku/` and `research/rish/` for Phase 5, and `research/porter/`
+for Phase 6, which also added the Phase 6 rish/Porter cross-reference to
+`research/rish/00-rish-research.md`).
 
 `00-foundations/` and `01-termux/` contain the completed Phase 2 chapters;
 `02-shell/` contains the completed Phase 3 Shell Command Bible; `03-android/`
 and `04-adb/` contain the completed Phase 4 Android and ADB chapters;
 `05-shizuku/` and `06-rish/` contain the completed Phase 5 Shizuku and rish
-chapters. The
+chapters, and `07-porter/` contains the completed Phase 6 Porter chapters. The
 remaining sections currently contain only their introduction stubs and are
 filled in by later phases.
 
