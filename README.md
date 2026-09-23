@@ -21,7 +21,8 @@ The project is developed in phases according to the roadmap and architecture in
 - Phase 4 — Android and ADB: **complete** (research, audit, chapters, and EPUB build done).
 - Phase 5 — Shizuku and rish: **complete** (research, audit, chapters, content audit, final verification, and EPUB build done).
 - Phase 6 — Porter: **complete** (research, audit, chapters, content audit, final verification, and EPUB build done).
-- Phases 7–13: planned in `PLAN.md`, not yet started.
+- Phase 7 — Power Tools / Git & GitHub: **complete** (research, audit, chapters, content audit, final verification, and EPUB build done).
+- Phases 8–13: planned in `PLAN.md`, not yet started.
 
 | Phase | Topic | Status |
 |-------|-------|--------|
@@ -31,7 +32,7 @@ The project is developed in phases according to the roadmap and architecture in
 | 4 | Android and ADB | complete, audited |
 | 5 | Shizuku and rish | complete, audited |
 | 6 | Porter | complete, audited |
-| 7 | Power Tools | not started |
+| 7 | Power Tools / Git & GitHub | complete, audited |
 | 8 | Documents, Media, and Data | not started |
 | 9 | Advanced Termux | not started |
 | 10 | Scripting and Automation | not started |
@@ -123,6 +124,30 @@ Shizuku, Sui, rish, porsh, ADB, and root distinct, and mark version-, device-,
 or OEM-dependent behavior (`[version-sensitive]`, `[DEVICE]`, `[OEM]`) rather
 than asserting it as universal.
 
+Phase 7 added the **Power Tools** and **Git & GitHub** documentation in
+`08-power-tools/` and `11-git-github/`: the Bible's development and
+power-user reference. The `08-power-tools/` chapters open with the Termux
+development environment and the Android constraints that shape all on-device
+development (W^X, `termux-exec`, UIDs, ports, and background/phantom-process
+limits), then cover the C/C++ toolchain and build systems (`clang` — Termux
+has no `gcc` — `make`, `cmake`, `ninja`, the autotools, `pkg-config`, and
+debuggers), editors (`vim`, `neovim`, `emacs`, `nano`, `micro`, `helix`),
+Python, Node.js/npm, Java/Kotlin and on-device Android build tooling
+(`aapt`/`apksigner`), Rust and Go, local databases (`mariadb`, `postgresql`,
+`redis` through `termux-services`), networking and developer utilities
+(`curl`/`wget`/`httpie`, `jq`/`yq`, network diagnostics, `tmux`, and
+productivity tools), and SSH and remote access (the `openssh` client and
+`sshd` on port 8022, key generation, `ssh-agent` under `termux-services`,
+`termux-auth`, and helper tools). The `11-git-github/` chapters cover Git
+installation/setup and the basic workflow, HTTPS authentication and credential
+handling, SSH authentication and keys, commit signing and verified commits,
+GitHub CLI (`gh`), GitHub releases and Actions, and repository maintenance and
+the Git ecosystem. The chapters are based on the audited research in
+`research/development/`, keep native Termux distinct from ADB/root/proot
+environments, and mark version-, device-, or OEM-dependent behavior
+(`[version-sensitive]`, `[DEVICE]`, `[OEM]`) rather than asserting it as
+universal.
+
 The project currently builds successfully as an EPUB with `./build.sh`.
 
 ## Repository Structure
@@ -140,17 +165,18 @@ Bible chapters live in the numbered directories (`00-foundations/`, `01-termux/`
 and so on) and in `appendices/`. Research notes live under `research/`, organized
 by subject (currently `research/termux/` for Phase 2, `research/commands/` for
 Phase 3, `research/android/` and `research/adb/` for Phase 4,
-`research/shizuku/` and `research/rish/` for Phase 5, and `research/porter/`
+`research/shizuku/` and `research/rish/` for Phase 5, `research/porter/`
 for Phase 6, which also added the Phase 6 rish/Porter cross-reference to
-`research/rish/00-rish-research.md`).
+`research/rish/00-rish-research.md`, and `research/development/` for Phase 7).
 
 `00-foundations/` and `01-termux/` contain the completed Phase 2 chapters;
 `02-shell/` contains the completed Phase 3 Shell Command Bible; `03-android/`
 and `04-adb/` contain the completed Phase 4 Android and ADB chapters;
 `05-shizuku/` and `06-rish/` contain the completed Phase 5 Shizuku and rish
-chapters, and `07-porter/` contains the completed Phase 6 Porter chapters. The
-remaining sections currently contain only their introduction stubs and are
-filled in by later phases.
+chapters, `07-porter/` contains the completed Phase 6 Porter chapters, and
+`08-power-tools/` and `11-git-github/` contain the completed Phase 7 Power
+Tools and Git & GitHub chapters. The remaining sections currently contain only
+their introduction stubs and are filled in by later phases.
 
 ## Editing Workflow
 
