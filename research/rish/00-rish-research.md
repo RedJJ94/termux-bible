@@ -214,6 +214,9 @@ porting of the permission layout).
   docs/source before any claim is written.
 - Do not state "rish works with Porter" unless Phase 6 verification supports it
   (AGENTS.md §19).
+- Phase 6 research answers this: stock rish cannot run against Porter (porter
+  ships its own client, `porsh`); see
+  `research/porter/00-porter-research.md` §11.
 
 ## 9. Termux Integration (verified, authoritative source) [A5]
 
